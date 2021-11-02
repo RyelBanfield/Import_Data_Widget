@@ -1,12 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Import Data Widget</title>
 </head>
 
 <body>
-  <h2>This is a sample Widget built using Zoho Extension toolkit.</h2>
+  <div>
+    <div>
+      <p>Please select the data you would like to import.</p>
+      <select id="sheet-type" title="Select the data you want to import">
+        <option value="">Select Sheet Type</option>
+        <option value="Companies">Companies</option>
+      </select>
+    </div>
+
+    <br />
+
+    <div>
+      <p>Please select the file you want to import.</p>
+      <input type="file" id="chooseFile" title="Choose the file you want to import" accept=".xlsx" disabled />
+      <button type="button" id="extractData" disabled>Import Data</button>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div>
+    <h1>FOR DEVELOPMENT</h1>
+    <button type="button" id="getRecords">Get Records & Save Structure</button>
+    <button type="button" id="exportExcel" disabled>Export Excel</button>
+  </div>
+
+  <script crossorigin="anonymous" type="text/javascript"
+    src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+  <script crossorigin="anonymous" type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+  <script crossorigin="anonymous" type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 
 </html>
