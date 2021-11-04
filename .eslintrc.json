@@ -28,6 +28,10 @@
             {
                 "allowTernary": true
             }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            "BinaryExpression[operator='in']"
         ]
     },
     "ignorePatterns": [

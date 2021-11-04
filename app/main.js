@@ -1,7 +1,7 @@
 /* global ZOHO */
 /* global XLSX */
 
-import { flatten } from './modules/flatten.js';
+import { flatten, unflatten } from './modules/flatten.js';
 import extractData from './modules/extractData.js';
 import exportExcel from './modules/exportExcel.js';
 
@@ -66,7 +66,7 @@ localExcelBtn.addEventListener('change', (event) => {
 });
 
 logJSONBtn.addEventListener('click', () => {
-  const excelData = {};
+  const excelFile = {};
   const fileReader = new FileReader();
   fileReader.onload = (event) => {
     const data = event.target.result;
@@ -76,10 +76,16 @@ logJSONBtn.addEventListener('click', () => {
 
     workbook.SheetNames.forEach((sheet) => {
       const row = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-      excelData[`${sheet}`] = row;
+      excelFile[`${sheet}`] = row;
     });
 
-    console.log(excelData);
+    for (const sheet in excelFile) {
+      if (excelFile[sheet].hasOwnProperty.call(excelFile, sheet)) {
+        excelFile[sheet] = excelFile[sheet].map((record) => unflatten(record));
+      }
+    }
+
+    console.log(excelFile);
   };
   fileReader.readAsBinaryString(localFile);
 });

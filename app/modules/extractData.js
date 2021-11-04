@@ -20,23 +20,27 @@ const extractData = (sheetType, submittedFile) => {
 
     ZOHO.CREATOR.init().then(() => {
       for (const sheet in excelData) {
-        for (const row in excelData[sheet]) {
-          const formData = {
-            data: unflatten(excelData[sheet][row]),
-          };
+        if (excelData.hasOwnProperty.call(excelData, sheet)) {
+          for (const row in excelData[sheet]) {
+            if (excelData[sheet].hasOwnProperty.call(excelData[sheet], row)) {
+              const formData = {
+                data: unflatten(excelData[sheet][row]),
+              };
 
-          const asyncSwitch = async (sheetType) => {
-            switch (sheetType) {
-              case 'Companies':
-                console.log(sheet, formData.data);
-                postForm(sheet, formData);
-                break;
-              default:
-                console.log('default');
-                break;
+              const asyncSwitch = async (sheetType) => {
+                switch (sheetType) {
+                  case 'Companies':
+                    console.log(sheet, formData.data);
+                    postForm(sheet, formData);
+                    break;
+                  default:
+                    console.log('default');
+                    break;
+                }
+              };
+              asyncSwitch(sheetType);
             }
-          };
-          asyncSwitch(sheetType);
+          }
         }
       }
     });
