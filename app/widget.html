@@ -14,7 +14,8 @@
       <p>Please select the data you would like to import.</p>
       <select id="sheet-type" title="Select the data you want to import">
         <option value="">Select Sheet Type</option>
-        <option value="Companies">Companies</option>
+        <option value="active-members">Active Members</option>
+        <option value="deferred-pensioners">Deferred Pensioners</option>
       </select>
     </div>
 
@@ -32,8 +33,13 @@
 
   <div>
     <h1>FOR DEVELOPMENT</h1>
-    <button type="button" id="getRecords">Get Records & Save Structure</button>
-    <button type="button" id="exportExcel" disabled>Export Excel</button>
+    <h2>Zoho Access</h2>
+    <button type="button" id="getRecords">Get Records & Save JSON Structure</button>
+    <button type="button" id="exportExcel" disabled>Export Excel From Saved JSON</button>
+    <br>
+    <h2>Parse Local Excel File</h2>
+    <input type="file" id="localExcel" title="Choose the file you want to parse" accept=".xlsx" />
+    <button type="button" id="logJSON">Log JSON</button>
   </div>
 
   <script crossorigin="anonymous" type="text/javascript"

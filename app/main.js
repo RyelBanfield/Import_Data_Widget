@@ -1,4 +1,5 @@
 import { flatten } from './modules/flatten.js';
+import { unflatten } from './modules/flatten.js';
 import { extractData } from './modules/extractData.js';
 import { exportExcel } from './modules/exportExcel.js';
 
@@ -53,4 +54,33 @@ getRecordsBtn.addEventListener('click', () => {
 const exportExcelBtn = document.getElementById('exportExcel');
 exportExcelBtn.addEventListener('click', () => {
   exportExcel(report, recordObject);
+});
+
+// FOR DEVELOPMENT ONLY
+
+let localFile = null;
+const localExcelBtn = document.getElementById('localExcel');
+localExcelBtn.addEventListener('change', (event) => {
+  localFile = event.target.files[0];
+});
+
+const logJSONBtn = document.getElementById('logJSON');
+logJSONBtn.addEventListener('click', () => {
+  const excelData = {};
+  let formData = {};
+  const fileReader = new FileReader();
+  fileReader.onload = (event) => {
+    const data = event.target.result;
+    const workbook = XLSX.read(data, {
+      type: 'binary',
+    });
+
+    workbook.SheetNames.forEach((sheet) => {
+      const row = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
+      excelData[`${sheet}`] = row;
+    });
+
+    console.log(excelData);
+  };
+  fileReader.readAsBinaryString(localFile);
 });
