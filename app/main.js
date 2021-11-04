@@ -1,15 +1,17 @@
+/* global ZOHO */
+/* global XLSX */
+
 import { flatten } from './modules/flatten.js';
-import { unflatten } from './modules/flatten.js';
-import { extractData } from './modules/extractData.js';
-import { exportExcel } from './modules/exportExcel.js';
+import extractData from './modules/extractData.js';
+import exportExcel from './modules/exportExcel.js';
+
+const sheetTypeDropdown = document.getElementById('sheet-type');
+const chooseFileBtn = document.getElementById('chooseFile');
+const importDataBtn = document.getElementById('importData');
 
 let sheetType = null;
 let submittedFile = null;
-let report = null;
-let recordObject = {};
 
-// Set the type of excel sheet being used
-const sheetTypeDropdown = document.getElementById('sheet-type');
 sheetTypeDropdown.addEventListener('change', (event) => {
   sheetType = event.target.value;
   sheetType === ''
@@ -17,23 +19,28 @@ sheetTypeDropdown.addEventListener('change', (event) => {
     : (chooseFileBtn.disabled = false);
 });
 
-// Get the file from the input
-const chooseFileBtn = document.getElementById('chooseFile');
 chooseFileBtn.addEventListener('change', (event) => {
-  submittedFile = event.target.files[0];
+  [submittedFile] = event.target.files;
   submittedFile === null
-    ? (extractDataBtn.disabled = true)
-    : (extractDataBtn.disabled = false);
+    ? (importDataBtn.disabled = true)
+    : (importDataBtn.disabled = false);
 });
 
-// Extract data from the file and post it to the database
-const extractDataBtn = document.getElementById('extractData');
-extractDataBtn.addEventListener('click', () => {
+importDataBtn.addEventListener('click', () => {
   extractData(sheetType, submittedFile);
 });
 
-// Get record and save object structure from database
+// FOR DEVELOPMENT ONLY
+
 const getRecordsBtn = document.getElementById('getRecords');
+const exportExcelBtn = document.getElementById('exportExcel');
+const localExcelBtn = document.getElementById('localExcel');
+const logJSONBtn = document.getElementById('logJSON');
+
+let report = null;
+let recordObject = {};
+let localFile = null;
+
 getRecordsBtn.addEventListener('click', () => {
   report = prompt('Enter the form name');
 
@@ -50,24 +57,16 @@ getRecordsBtn.addEventListener('click', () => {
   });
 });
 
-// Export the record to an excel file
-const exportExcelBtn = document.getElementById('exportExcel');
 exportExcelBtn.addEventListener('click', () => {
   exportExcel(report, recordObject);
 });
 
-// FOR DEVELOPMENT ONLY
-
-let localFile = null;
-const localExcelBtn = document.getElementById('localExcel');
 localExcelBtn.addEventListener('change', (event) => {
-  localFile = event.target.files[0];
+  [localFile] = event.target.files;
 });
 
-const logJSONBtn = document.getElementById('logJSON');
 logJSONBtn.addEventListener('click', () => {
   const excelData = {};
-  let formData = {};
   const fileReader = new FileReader();
   fileReader.onload = (event) => {
     const data = event.target.result;

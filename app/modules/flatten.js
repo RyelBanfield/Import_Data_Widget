@@ -4,14 +4,13 @@ export const flatten = (data) => {
     if (Object(cur) !== cur) {
       result[prop] = cur;
     } else if (Array.isArray(cur)) {
-      for (var i = 0, l = cur.length; i < l; i++)
-        recurse(cur[i], prop + '[' + i + ']');
-      if (l == 0) result[prop] = [];
+      for (let i = 0, l = cur.length; i < l; i += 1) recurse(cur[i], `${prop}[${i}]`);
+      if (l === 0) result[prop] = [];
     } else {
       let isEmpty = true;
-      for (let p in cur) {
+      for (const p in cur) {
         isEmpty = false;
-        recurse(cur[p], prop ? prop + '.' + p : p);
+        recurse(cur[p], prop ? `${prop}.${p}` : p);
       }
       if (isEmpty && prop) result[prop] = {};
     }
@@ -22,12 +21,12 @@ export const flatten = (data) => {
 
 export const unflatten = (data) => {
   if (Object(data) !== data || Array.isArray(data)) return data;
-  const regex = /\.?([^.\[\]]+)|\[(\d+)\]/g,
-    resultHolder = {};
+  const regex = /\.?([^.\[\]]+)|\[(\d+)\]/g;
+  const resultHolder = {};
   for (const p in data) {
-    let cur = resultHolder,
-      prop = '',
-      m;
+    let cur = resultHolder;
+    let prop = '';
+    let m;
     while ((m = regex.exec(p))) {
       cur = cur[prop] || (cur[prop] = m[2] ? [] : {});
       prop = m[2] || m[1];

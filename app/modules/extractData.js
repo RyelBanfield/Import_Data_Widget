@@ -1,7 +1,10 @@
-import { unflatten } from './flatten.js';
-import { postForm } from './postForm.js';
+/* global ZOHO */
+/* global XLSX */
 
-export const extractData = (sheetType, submittedFile) => {
+import { unflatten } from './flatten.js';
+import postForm from './postForm.js';
+
+const extractData = (sheetType, submittedFile) => {
   const excelData = {};
   const fileReader = new FileReader();
   fileReader.onload = (event) => {
@@ -16,9 +19,9 @@ export const extractData = (sheetType, submittedFile) => {
     });
 
     ZOHO.CREATOR.init().then(() => {
-      for (let sheet in excelData) {
-        for (let row in excelData[sheet]) {
-          let formData = {
+      for (const sheet in excelData) {
+        for (const row in excelData[sheet]) {
+          const formData = {
             data: unflatten(excelData[sheet][row]),
           };
 
@@ -27,6 +30,9 @@ export const extractData = (sheetType, submittedFile) => {
               case 'Companies':
                 console.log(sheet, formData.data);
                 postForm(sheet, formData);
+                break;
+              default:
+                console.log('default');
                 break;
             }
           };
@@ -37,3 +43,5 @@ export const extractData = (sheetType, submittedFile) => {
   };
   fileReader.readAsBinaryString(submittedFile);
 };
+
+export default extractData;
