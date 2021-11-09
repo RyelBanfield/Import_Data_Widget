@@ -10,7 +10,7 @@ const postForm = async (sheet, formData) => {
     if (response.code === 3000) {
       console.log('Record added successfully');
     } else {
-      console.log(response);
+      console.error(response);
     }
   });
 };

@@ -67,6 +67,7 @@ localExcelBtn.addEventListener('change', (event) => {
 
 logJSONBtn.addEventListener('click', () => {
   const excelFile = {};
+  let sheetName;
   const fileReader = new FileReader();
   fileReader.onload = (event) => {
     const data = event.target.result;
@@ -77,6 +78,7 @@ logJSONBtn.addEventListener('click', () => {
     workbook.SheetNames.forEach((sheet) => {
       const row = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
       excelFile[`${sheet}`] = row;
+      sheetName = sheet;
     });
 
     for (const sheet in excelFile) {
@@ -85,7 +87,7 @@ logJSONBtn.addEventListener('click', () => {
       }
     }
 
-    console.log(excelFile);
+    console.log(excelFile[`${sheetName}`]);
   };
   fileReader.readAsBinaryString(localFile);
 });
