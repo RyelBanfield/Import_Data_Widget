@@ -50,7 +50,7 @@ getRecordsBtn.addEventListener('click', () => {
     };
 
     ZOHO.CREATOR.API.getAllRecords(config).then((response) => {
-      console.log('Zoho Response', response.data);
+      console.log('Zoho Response', response.data[0]);
       recordObject = flatten(response.data[0]);
       exportExcelBtn.disabled = false;
     });

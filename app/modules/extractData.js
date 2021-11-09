@@ -2,7 +2,7 @@
 /* global XLSX */
 
 import { unflatten } from './flatten.js';
-import postForm from './postForm.js';
+import { addRecord, updateRecord } from './zohoAPI.js';
 
 const extractData = (sheetType, submittedFile) => {
   const excelFile = {};
@@ -29,16 +29,16 @@ const extractData = (sheetType, submittedFile) => {
 
               const asyncSwitch = async (sheetType) => {
                 switch (sheetType) {
-                  case 'initial-data-load': {
-                    const record = {};
+                  case 'InitialDataLoad': {
+                    const records = {};
 
                     await ZOHO.CREATOR.API.getAllRecords({
                       reportName: 'Plans_Report',
                     }).then((response) => {
-                      record.plansReport = response.data;
+                      records.plansReport = response.data;
                     });
 
-                    const { plansReport } = record;
+                    const { plansReport } = records;
 
                     const planCodeID = plansReport.find(
                       (plan) => plan.PlanCode.display_value
@@ -48,7 +48,26 @@ const extractData = (sheetType, submittedFile) => {
 
                     console.log(sheet, formData.data);
 
-                    postForm('Members', formData);
+                    addRecord('Members', formData);
+                    break;
+                  }
+                  case 'BenSpsDepData': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    console.log(formData.data);
+                    updateRecord('Members_Report', memberID, formData);
                     break;
                   }
                   default:
