@@ -1,9 +1,8 @@
 /* global ZOHO */
 /* global XLSX */
 
-import { flatten, unflatten } from './modules/flatten.js';
+import { unflatten } from './modules/flatten.js';
 import extractData from './modules/extractData.js';
-import exportExcel from './modules/exportExcel.js';
 
 const sheetTypeDropdown = document.getElementById('sheet-type');
 const chooseFileBtn = document.getElementById('chooseFile');
@@ -33,12 +32,10 @@ importDataBtn.addEventListener('click', () => {
 // FOR DEVELOPMENT ONLY
 
 const getRecordsBtn = document.getElementById('getRecords');
-const exportExcelBtn = document.getElementById('exportExcel');
 const localExcelBtn = document.getElementById('localExcel');
 const logJSONBtn = document.getElementById('logJSON');
 
 let report = null;
-let recordObject = {};
 let localFile = null;
 
 getRecordsBtn.addEventListener('click', () => {
@@ -50,15 +47,9 @@ getRecordsBtn.addEventListener('click', () => {
     };
 
     ZOHO.CREATOR.API.getAllRecords(config).then((response) => {
-      console.log('Zoho Response', response.data[0]);
-      recordObject = flatten(response.data[0]);
-      exportExcelBtn.disabled = false;
+      console.log('Zoho Response', response.data);
     });
   });
-});
-
-exportExcelBtn.addEventListener('click', () => {
-  exportExcel(report, recordObject);
 });
 
 localExcelBtn.addEventListener('change', (event) => {

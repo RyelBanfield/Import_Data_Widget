@@ -46,11 +46,11 @@ const extractData = (sheetType, submittedFile) => {
                     ).PlanCode.ID;
                     formData.data.PlanCode = planCodeID;
 
-                    console.log(sheet, formData.data);
+                    await addRecord('Members', formData);
 
-                    addRecord('Members', formData);
                     break;
                   }
+
                   case 'BenSpsDepData': {
                     const records = {};
 
@@ -66,8 +66,29 @@ const extractData = (sheetType, submittedFile) => {
                       (member) => member.UniID === (formData.data.UniID).toString(),
                     ).ID;
 
-                    console.log(formData.data);
-                    updateRecord('Members_Report', memberID, formData);
+                    const { Beneficiaries, Dependants } = formData.data;
+
+                    delete formData.data.UniID;
+                    delete formData.data.Beneficiaries;
+                    delete formData.data.Dependants;
+
+                    await updateRecord('Members_Report', memberID, formData);
+
+                    formData.data = {
+                      Member: memberID,
+                      ...Beneficiaries,
+                    };
+
+                    await addRecord('Beneficiaries', formData);
+
+                    if (Dependants) {
+                      formData.data = {
+                        Member: memberID,
+                        ...Dependants,
+                      };
+                      await addRecord('Dependants', formData);
+                    }
+
                     break;
                   }
                   default:
