@@ -90,7 +90,7 @@ const extractData = (sheetType, submittedFile) => {
 
                     break;
                   }
-                  case 'StaringBalances': {
+                  case 'SalaryAndRegConts': {
                     const records = {};
 
                     await ZOHO.CREATOR.API.getAllRecords({
@@ -107,7 +107,6 @@ const extractData = (sheetType, submittedFile) => {
 
                     formData.data.Member = memberID;
 
-                    console.log(formData);
                     await addRecord('SalaryAndRegConts', formData);
                     break;
                   }
