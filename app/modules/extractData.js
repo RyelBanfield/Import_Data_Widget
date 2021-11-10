@@ -47,7 +47,6 @@ const extractData = (sheetType, submittedFile) => {
                     formData.data.PlanCode = planCodeID;
 
                     await addRecord('Members', formData);
-
                     break;
                   }
 
@@ -89,6 +88,27 @@ const extractData = (sheetType, submittedFile) => {
                       await addRecord('Dependants', formData);
                     }
 
+                    break;
+                  }
+                  case 'StaringBalances': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    formData.data.Member = memberID;
+
+                    console.log(formData);
+                    await addRecord('SalaryAndRegConts', formData);
                     break;
                   }
                   default:
