@@ -110,6 +110,67 @@ const extractData = (sheetType, submittedFile) => {
                     await addRecord('SalaryAndRegConts', formData);
                     break;
                   }
+                  case 'AVCs': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    formData.data.Member = memberID;
+
+                    await addRecord('AVCs', formData);
+                    break;
+                  }
+                  case 'StatusUpdate': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    formData.data.Member = memberID;
+
+                    await addRecord('PlanHistory', formData);
+
+                    break;
+                  }
+                  case 'BenPd': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    formData.data.Member = memberID;
+
+                    await addRecord('BenPd', formData);
+                    break;
+                  }
                   default:
                     console.log('default');
                     break;
