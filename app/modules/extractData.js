@@ -171,6 +171,41 @@ const extractData = (sheetType, submittedFile) => {
                     await addRecord('BenPd', formData);
                     break;
                   }
+                  case 'Pension': {
+                    const records = {};
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Members_Report',
+                    }).then((response) => {
+                      records.membersReport = response.data;
+                    });
+
+                    const { membersReport } = records;
+
+                    const memberID = membersReport.find(
+                      (member) => member.UniID === (formData.data.UniID).toString(),
+                    ).ID;
+
+                    formData.data.Member = memberID;
+
+                    await ZOHO.CREATOR.API.getAllRecords({
+                      reportName: 'Plans_Report',
+                    }).then((response) => {
+                      records.plansReport = response.data;
+                    });
+
+                    const { plansReport } = records;
+
+                    const planCodeID = plansReport.find(
+                      (plan) => plan.PlanCode.display_value
+                        === formData.data.PlanCode,
+                    ).PlanCode.ID;
+
+                    formData.data.PlanCode = planCodeID;
+
+                    await addRecord('MemberPension', formData);
+                    break;
+                  }
                   default:
                     console.log('default');
                     break;
