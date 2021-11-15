@@ -5,13 +5,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
   <title>Import Data Widget</title>
 </head>
 
 <body>
-  <div>
+  <div class="container">
     <div>
-      <p>Please select the data you would like to import.</p>
+      <p class="instruction">Please select the data you would like to import.</p>
       <select id="sheet-type" title="Select the data you want to import">
         <option value="">Select Sheet Type</option>
         <option value="InitialDataLoad">InitialDataLoad</option>
@@ -27,7 +28,7 @@
     <br />
 
     <div>
-      <p>Please select the file you want to import.</p>
+      <p class="instruction">Please select the file you want to import.</p>
       <input type="file" id="chooseFile" title="Choose the file you want to import" accept=".xlsx" disabled />
       <button type="button" id="importData" disabled>Import Data</button>
     </div>
@@ -36,7 +37,7 @@
   <br />
   <br />
 
-  <div>
+  <div class="development" hidden>
     <h1>FOR DEVELOPMENT</h1>
     <h2>Zoho Access</h2>
     <button type="button" id="getRecords">Get Records & Save JSON Structure</button>

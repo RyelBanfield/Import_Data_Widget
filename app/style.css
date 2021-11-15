@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  height: 100vh;
+  padding: 8rem 2rem;
+}
+
+.instruction {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+#sheet-type {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+#chooseFile {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+#importData {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+#importData:hover {
+  background-color: #ccc;
+}
