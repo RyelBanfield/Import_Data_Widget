@@ -1,6 +1,8 @@
 /* global ZOHO */
 
-export const addRecord = async (formName, data) => {
+export const addRecord = async (formName, data, count) => {
+  const importStatusDiv = document.getElementById('importStatusDiv');
+
   const config = {
     formName,
     data,
@@ -9,8 +11,16 @@ export const addRecord = async (formName, data) => {
   ZOHO.CREATOR.API.addRecord(config).then((response) => {
     if (response.code === 3000) {
       console.log('Record added successfully');
+      const newDiv = document.createElement('div');
+      const newContent = document.createTextNode(`Row ${count} added successfully`);
+      newDiv.appendChild(newContent);
+      importStatusDiv.appendChild(newDiv);
     } else {
       console.error(response);
+      const newDiv = document.createElement('div');
+      const errorMessage = document.createTextNode(`Error adding row ${count}: ${JSON.stringify(response.error)}`);
+      newDiv.appendChild(errorMessage);
+      importStatusDiv.appendChild(newDiv);
     }
   });
 };

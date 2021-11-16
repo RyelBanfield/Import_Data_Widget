@@ -1,12 +1,14 @@
+/* eslint-disable no-loop-func */
 /* global ZOHO */
 /* global XLSX */
 
 import { unflatten } from './flatten.js';
 import { addRecord, updateRecord } from './zohoAPI.js';
 
-const extractData = async (sheetType, submittedFile) => {
+const extractData = (sheetType, submittedFile) => {
   const excelFile = {};
   const fileReader = new FileReader();
+  let count = 1;
   fileReader.onload = (event) => {
     const data = event.target.result;
     const workbook = XLSX.read(data, {
@@ -45,7 +47,9 @@ const extractData = async (sheetType, submittedFile) => {
                     ).PlanCode.ID;
                     formData.data.PlanCode = planCodeID;
 
-                    await addRecord('Members', formData);
+                    count += 1;
+
+                    await addRecord('Members', formData, count);
                     break;
                   }
 

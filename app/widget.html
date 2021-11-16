@@ -34,20 +34,14 @@
       <input type="file" id="chooseFile" title="Select the file." accept=".xlsx" disabled />
       <button type="button" id="importData" disabled>Import Data</button>
     </div>
+
+    <br />
+
+    <div id="importStatusDiv" hidden>
+      <h2 id="importStatusHeader">Processing...</h2>
+      <hr>
+    </div>
   </div>
-
-  <br />
-  <br />
-
-  <!-- <div class="development" hidden>
-    <h1>FOR DEVELOPMENT</h1>
-    <h2>Zoho Access</h2>
-    <button type="button" id="getRecords">Get Records & Save JSON Structure</button>
-    <br>
-    <h2>Parse Local Excel File</h2>
-    <input type="file" id="localExcel" title="Choose the file you want to parse" accept=".xlsx" />
-    <button type="button" id="logJSON">Log JSON</button>
-  </div> -->
 
   <script crossorigin="anonymous" src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
   <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>

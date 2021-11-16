@@ -57,3 +57,14 @@ h1 {
   font-weight: bold;
   padding: 0.68rem;
 }
+
+#importStatusDiv {
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+#importStatusHeader {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
