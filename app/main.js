@@ -6,6 +6,7 @@ import extractData from './modules/extractData.js';
 
 const sheetTypeDropdown = document.getElementById('sheet-type');
 const chooseFileBtn = document.getElementById('chooseFile');
+const importDataDiv = document.getElementById('importDataDiv');
 const importDataBtn = document.getElementById('importData');
 
 let sheetType = null;
@@ -14,8 +15,8 @@ let submittedFile = null;
 sheetTypeDropdown.addEventListener('change', (event) => {
   sheetType = event.target.value;
   sheetType === ''
-    ? (chooseFileBtn.disabled = true)
-    : (chooseFileBtn.disabled = false);
+    ? (importDataDiv.hidden = true) (chooseFileBtn.disabled = true) 
+    : (importDataDiv.hidden = false) (chooseFileBtn.disabled = false);
 });
 
 chooseFileBtn.addEventListener('change', (event) => {

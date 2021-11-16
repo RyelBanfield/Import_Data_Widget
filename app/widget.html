@@ -11,8 +11,9 @@
 
 <body>
   <div class="container">
+    <h1>Import Data</h1>
     <div>
-      <p class="instruction">Please select the data you would like to import.</p>
+      <p class="instruction">Select the data you want to import.</p>
       <select id="sheet-type" title="Select the data you want to import">
         <option value="">Select Sheet Type</option>
         <option value="InitialDataLoad">InitialDataLoad</option>
@@ -27,9 +28,9 @@
 
     <br />
 
-    <div>
-      <p class="instruction">Please select the file you want to import.</p>
-      <input type="file" id="chooseFile" title="Choose the file you want to import" accept=".xlsx" disabled />
+    <div id="importDataDiv" hidden>
+      <p class="instruction">Select the file.</p>
+      <input type="file" id="chooseFile" title="Select the file." accept=".xlsx" disabled />
       <button type="button" id="importData" disabled>Import Data</button>
     </div>
   </div>

@@ -10,7 +10,14 @@ body {
 
 .container {
   height: 100vh;
-  padding: 8rem 2rem;
+  padding: 4rem 2.5rem;
+}
+
+h1 {
+  color: rgb(0, 76, 153);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
 }
 
 .instruction {
@@ -26,7 +33,7 @@ body {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
 }
 
@@ -45,13 +52,8 @@ body {
   background-color: #fff;
   border-radius: 0.25rem;
   border: 1px solid #ccc;
-  color: #333;
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  padding: 0.5rem;
-}
-
-#importData:hover {
-  background-color: #ccc;
+  padding: 0.68rem;
 }
