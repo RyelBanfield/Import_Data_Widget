@@ -13,14 +13,18 @@ export const addRecord = async (formName, data, count) => {
       console.log('Record added successfully');
       const newDiv = document.createElement('div');
       const newContent = document.createTextNode(`Row ${count} added successfully`);
+      const br = document.createElement('br');
       newDiv.appendChild(newContent);
       importStatusDiv.appendChild(newDiv);
+      importStatusDiv.appendChild(br);
     } else {
       console.error(response);
       const newDiv = document.createElement('div');
       const errorMessage = document.createTextNode(`Error adding row ${count}: ${JSON.stringify(response.error)}`);
+      const br = document.createElement('br');
       newDiv.appendChild(errorMessage);
       importStatusDiv.appendChild(newDiv);
+      importStatusDiv.appendChild(br);
     }
   });
 };
