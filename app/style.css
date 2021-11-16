@@ -68,3 +68,7 @@ h1 {
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
 }
+
+#importStatusDiv > hr {
+  margin-bottom: 0.75rem;
+}

@@ -50,6 +50,8 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('Members', formData, count);
+                    const importStatusHeader = document.getElementById('importStatusHeader');
+                    importStatusHeader.innerHTML = `${count - 1} records imported`;
                     break;
                   }
 
