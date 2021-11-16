@@ -10,8 +10,7 @@
         "sourceType": "module"
     },
     "extends": [
-        "airbnb-base",
-        "stylelint-config-standard-scss"
+        "airbnb-base"
     ],
     "rules": {
         "no-shadow": "off",

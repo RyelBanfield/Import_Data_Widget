@@ -6,11 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css">
+
   <title>Import Data Widget</title>
 </head>
 
 <body>
-  <div class="container">
+  <div id="container">
     <h1>Import Data</h1>
     <div>
       <p class="instruction">Select the data you want to import.</p>
@@ -38,7 +39,7 @@
   <br />
   <br />
 
-  <div class="development" hidden>
+  <!-- <div class="development" hidden>
     <h1>FOR DEVELOPMENT</h1>
     <h2>Zoho Access</h2>
     <button type="button" id="getRecords">Get Records & Save JSON Structure</button>
@@ -46,7 +47,7 @@
     <h2>Parse Local Excel File</h2>
     <input type="file" id="localExcel" title="Choose the file you want to parse" accept=".xlsx" />
     <button type="button" id="logJSON">Log JSON</button>
-  </div>
+  </div> -->
 
   <script crossorigin="anonymous" src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
   <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>

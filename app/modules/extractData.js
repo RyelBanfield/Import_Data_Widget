@@ -4,7 +4,7 @@
 import { unflatten } from './flatten.js';
 import { addRecord, updateRecord } from './zohoAPI.js';
 
-const extractData = (sheetType, submittedFile) => {
+const extractData = async (sheetType, submittedFile) => {
   const excelFile = {};
   const fileReader = new FileReader();
   fileReader.onload = (event) => {
@@ -41,8 +41,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { plansReport } = records;
 
                     const planCodeID = plansReport.find(
-                      (plan) => plan.PlanCode.display_value
-                        === formData.data.PlanCode,
+                      (plan) => plan.PlanCode.display_value === formData.data.PlanCode,
                     ).PlanCode.ID;
                     formData.data.PlanCode = planCodeID;
 
@@ -62,7 +61,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     const { Beneficiaries, Dependants } = formData.data;
@@ -102,7 +101,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     formData.data.Member = memberID;
@@ -122,7 +121,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     formData.data.Member = memberID;
@@ -142,7 +141,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     formData.data.Member = memberID;
@@ -163,7 +162,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     formData.data.Member = memberID;
@@ -183,7 +182,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { membersReport } = records;
 
                     const memberID = membersReport.find(
-                      (member) => member.UniID === (formData.data.UniID).toString(),
+                      (member) => member.UniID === formData.data.UniID.toString(),
                     ).ID;
 
                     formData.data.Member = memberID;
@@ -197,8 +196,7 @@ const extractData = (sheetType, submittedFile) => {
                     const { plansReport } = records;
 
                     const planCodeID = plansReport.find(
-                      (plan) => plan.PlanCode.display_value
-                        === formData.data.PlanCode,
+                      (plan) => plan.PlanCode.display_value === formData.data.PlanCode,
                     ).PlanCode.ID;
 
                     formData.data.PlanCode = planCodeID;
