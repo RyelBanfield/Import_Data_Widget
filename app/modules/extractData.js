@@ -9,6 +9,7 @@ const extractData = (sheetType, submittedFile) => {
   const excelFile = {};
   const fileReader = new FileReader();
   let count = 1;
+
   fileReader.onload = (event) => {
     const data = event.target.result;
     const workbook = XLSX.read(data, {
@@ -50,9 +51,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('Members', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
                     break;
                   }
 
@@ -79,12 +77,12 @@ const extractData = (sheetType, submittedFile) => {
 
                     await updateRecord('Members_Report', memberID, formData);
 
-                    count += 1;
-
                     formData.data = {
                       Member: memberID,
                       ...Beneficiaries,
                     };
+
+                    count += 1;
 
                     await addRecord('Beneficiaries', formData, count);
 
@@ -95,9 +93,6 @@ const extractData = (sheetType, submittedFile) => {
                       };
                       await addRecord('Dependants', formData, count);
                     }
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
 
                     break;
                   }
@@ -121,10 +116,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('SalaryAndRegConts', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
-
                     break;
                   }
                   case 'AVCs': {
@@ -147,10 +138,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('AVCs', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
-
                     break;
                   }
                   case 'StatusUpdate': {
@@ -173,10 +160,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('PlanHistory', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
-
                     break;
                   }
                   case 'BenPd': {
@@ -199,10 +182,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('BenPd', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
-
                     break;
                   }
                   case 'Pension': {
@@ -239,10 +218,6 @@ const extractData = (sheetType, submittedFile) => {
                     count += 1;
 
                     await addRecord('MemberPension', formData, count);
-
-                    const importStatusHeader = document.getElementById('importStatusHeader');
-                    importStatusHeader.innerHTML = `${count - 1} records processed`;
-
                     break;
                   }
                   default:
