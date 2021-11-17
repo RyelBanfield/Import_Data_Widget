@@ -2,6 +2,26 @@
 
 import handleImportStatus from './handleImportStatus.js';
 
+export const getRecords = async (sheetType) => {
+  switch (sheetType) {
+    case 'InitialDataLoad': {
+      let plansReport;
+
+      await ZOHO.CREATOR.API.getAllRecords({
+        reportName: 'Plans_Report',
+      }).then((response) => {
+        plansReport = response.data;
+      });
+
+      return plansReport;
+    }
+    default: {
+      console.log('default');
+      return {};
+    }
+  }
+};
+
 export const addRecord = (formName, data, count) => {
   const config = {
     formName,
