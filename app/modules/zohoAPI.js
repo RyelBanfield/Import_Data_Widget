@@ -1,10 +1,8 @@
 /* global ZOHO */
 
-export const addRecord = (formName, data, count) => {
-  const importStatusDiv = document.getElementById('importStatusDiv');
-  const importStatusHeader = document.getElementById('importStatusHeader');
-  const newDiv = document.createElement('div');
+import handleImportStatus from './handleImportStatus.js';
 
+export const addRecord = (formName, data, count) => {
   const config = {
     formName,
     data,
@@ -13,20 +11,10 @@ export const addRecord = (formName, data, count) => {
   ZOHO.CREATOR.API.addRecord(config).then((response) => {
     if (response.code === 3000) {
       console.log('Record added successfully');
-      importStatusHeader.innerHTML = `${count - 1} records processed`;
-      const successMessage = document.createTextNode(`Row ${count} added successfully`);
-      const br = document.createElement('br');
-      newDiv.appendChild(successMessage);
-      importStatusDiv.appendChild(newDiv);
-      importStatusDiv.appendChild(br);
+      handleImportStatus('success', count);
     } else {
       console.error(response);
-      importStatusHeader.innerHTML = `${count - 1} records processed`;
-      const errorMessage = document.createTextNode(`Error adding row ${count}: ${JSON.stringify(response.error)}`);
-      const br = document.createElement('br');
-      newDiv.appendChild(errorMessage);
-      importStatusDiv.appendChild(newDiv);
-      importStatusDiv.appendChild(br);
+      handleImportStatus('error', count, response.error);
     }
   });
 };

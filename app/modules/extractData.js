@@ -1,8 +1,7 @@
-/* eslint-disable no-loop-func */
 /* global ZOHO */
 /* global XLSX */
 
-import { unflatten } from './flatten.js';
+import unflatten from './unflatten.js';
 import { addRecord, updateRecord } from './zohoAPI.js';
 
 const extractData = (sheetType, submittedFile) => {

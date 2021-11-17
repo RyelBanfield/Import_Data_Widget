@@ -14,9 +14,6 @@ sheetTypeDropdown.addEventListener('change', (event) => {
   sheetType === ''
     ? (importDataDiv.hidden = true)
     : (importDataDiv.hidden = false);
-  sheetType === ''
-    ? (chooseFileBtn.disabled = true)
-    : (chooseFileBtn.disabled = false);
 });
 
 chooseFileBtn.addEventListener('change', (event) => {
