@@ -11,16 +11,12 @@ let submittedFile = null;
 
 sheetTypeDropdown.addEventListener('change', (event) => {
   sheetType = event.target.value;
-  sheetType === ''
-    ? (importDataDiv.hidden = true)
-    : (importDataDiv.hidden = false);
+  importDataDiv.hidden = false;
 });
 
 chooseFileBtn.addEventListener('change', (event) => {
   [submittedFile] = event.target.files;
-  submittedFile === null
-    ? (importDataBtn.disabled = true)
-    : (importDataBtn.disabled = false);
+  importDataBtn.disabled = submittedFile === null;
 });
 
 importDataBtn.addEventListener('click', () => {
