@@ -4,19 +4,18 @@ const handleImportStatus = (status, count, response = null) => {
   const p = document.createElement('p');
   const br = document.createElement('br');
 
-  importStatusHeader.innerHTML = `${count - 1} records processed`;
+  importStatusHeader.innerHTML = `${count} records processed`;
 
   if (status === 'success') {
-    const successMessage = document.createTextNode(`Row ${count} added successfully`);
+    const successMessage = document.createTextNode(`Row ${count + 1} added successfully`);
     p.appendChild(successMessage);
-    importStatusDiv.appendChild(p);
-    importStatusDiv.appendChild(br);
   } else if (status === 'error') {
-    const errorMessage = document.createTextNode(`Error adding row ${count}: ${JSON.stringify(response)}`);
+    const errorMessage = document.createTextNode(`Error adding row ${count + 1}: ${JSON.stringify(response)}`);
     p.appendChild(errorMessage);
-    importStatusDiv.appendChild(p);
-    importStatusDiv.appendChild(br);
   }
+
+  importStatusDiv.appendChild(p);
+  importStatusDiv.appendChild(br);
 };
 
 export default handleImportStatus;

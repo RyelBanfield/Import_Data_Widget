@@ -22,13 +22,13 @@ export const getRecords = async (sheetType) => {
   }
 };
 
-export const addRecord = (formName, data, count) => {
+export const addRecord = async (formName, data, count) => {
   const config = {
     formName,
     data,
   };
 
-  ZOHO.CREATOR.API.addRecord(config).then((response) => {
+  await ZOHO.CREATOR.API.addRecord(config).then((response) => {
     if (response.code === 3000) {
       console.log('Record added successfully');
       handleImportStatus('success', count);
